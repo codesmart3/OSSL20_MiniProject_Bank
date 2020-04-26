@@ -70,6 +70,10 @@ void input_handler(char input[], Record records[]){
    else if(!strcmp(input, "7")){
      defragment(records, numrecords);
    }
+   else if(!strcmp(input, "8")){
+     read_from_txtfile(records);
+     while ((getchar()) != '\n');
+   }
    else if(!strcmp(input, "99"))
       printf("Terminating... bye!\n"); // Quit - no operation (an empty statement with a semi-colon)
    else
@@ -96,5 +100,6 @@ void display_menu(){
    printf(" 5. Delete an account\n");
    printf(" 6. Update Information\n");
    printf(" 7. Defragmentation\n");
+   printf(" 8. Read from text file\n");
    printf(" 99. Quit\n");
 }

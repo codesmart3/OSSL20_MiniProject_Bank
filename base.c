@@ -67,8 +67,9 @@ void add_a_record(Record records[]){
 
    printf("Please enter your name: ");
    fgets(records[i].name, 100, stdin);
+   records[i].name[strcspn(records[i].name, "\n")] = 0;
    printf("Please enter your Residental Registration Number(with -): ");
-
+  
    while(1){
     scanf("%s", records[i].rrn);
     if(strlen(records[i].rrn) < 14 || strlen(records[i].rrn) > 14){
@@ -81,6 +82,7 @@ void add_a_record(Record records[]){
 
   printf("Please enter your address: ");
   fgets(records[i].address, 100, stdin);
+  records[i].address[strcspn(records[i].address, "\n")] = 0;
   //while ((getchar()) != '\n');
 
   printf("Please enter your phone number(with - ): ");
@@ -249,8 +251,8 @@ void update_record(Record records[]){
           while ((getchar()) != '\n');
           printf("Name: ");
           //fgets(records[i].name, 100, stdin);
-          fgets(uname, 100, stdin);
-          strcpy(records[i].name, uname);
+          fgets(records[i].name, 100, stdin);
+          records[i].name[strcspn(records[i].name, "\n")] = 0;
           printf("Your name has been succesfully updated: %s\n\n", records[i].name);
           printf("Hit Enter to continue...\n");
           return;
@@ -280,6 +282,7 @@ void update_record(Record records[]){
           while ((getchar()) != '\n');
           printf("Address: ");
           fgets(records[i].address, 100, stdin);
+          records[i].address[strcspn(records[i].address, "\n")] = 0;
           //scanf("%s", records[i].address);
           //while ((getchar()) != '\n');
           printf("Your address has been successfully updated: %s\n\n", records[i].address);
@@ -291,4 +294,73 @@ void update_record(Record records[]){
  } // end of for
    printf("Inavlid Account Number.\n\n");
 } // end of function
+
+void read_from_txtfile(Record records[]){
+  FILE *fp;
+    char str[1000];
+    char* filename = "list.txt";
+    int i = 0;
+    int index = 0;
+    int length = 0;
+    double accno = 0;
+    char *dummy;
+ 
+    fp = fopen(filename, "r");
+    if (fp == NULL){
+        printf("File does not exist: %s",filename);
+        return;
+    }
+
+    char buf[100];
+
+    while (fgets(str, 1000, fp) != NULL){
+        if(i == 0){        
+          char *temp = str + 6;
+          length = strlen(temp);
+          temp[length - 1] = '\0';
+          strcpy(records[index].name, temp);
+        } else if(i == 1){
+            char *temp = str + 5;
+            length = strlen(temp);
+            temp[length - 1] = '\0';
+            strcpy(records[index].rrn, temp);
+        } else if(i == 2){
+            char *temp = str + 16;
+            length = strlen(temp);
+            temp[length - 1] = '\0';
+            records[index].accountno = strtod(temp, &dummy);
+        } else if(i == 3){
+            char *temp = str + 10;
+            length = strlen(temp);
+            temp[length - 1] = '\0';
+            strcpy(records[index].password, temp);
+        } else if(i == 4){
+            char *temp = str + 9;
+            length = strlen(temp);
+            temp[length - 1] = '\0';
+            strcpy(records[index].address, temp);
+        } else if(i == 5){
+            char *temp = str + 14;
+            length = strlen(temp);
+            temp[length - 1] = '\0';
+            strcpy(records[index].phoneno, temp);
+        } else if(i == 6){
+            records[index].valid = 1;
+            index++;
+        }
+        i++;
+        if(i == 8){
+          i = 0;
+        }
+      }
+    fclose(fp);
+
+    // for(int a = 0; a < 4; a++){
+    //  printf("Name: %s \n", records[a].name);
+    //  printf("Account Number: %0.0f \n", records[a].accountno);
+    //  printf("Address: %s\n", records[a].address);
+    //  printf("Phone: %s \n", records[a].phoneno);
+    //  printf("-----------\n\n");
+    // }
+}
 
