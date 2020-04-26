@@ -11,5 +11,6 @@ void save_to_txtfile(Record[]);
 void delete_record(Record[]);
 void update_record(Record[]);
 void read_from_txtfile(Record[]);
+void clear_all_records(Record[]);
 
 #endif

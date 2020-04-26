@@ -9,7 +9,6 @@ typedef struct{
    char name[100];
    char rrn[14];
    char phoneno[13];
-   //struct Account accountno[14];
    double accountno;
    char password[6];
    char address[100];

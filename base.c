@@ -10,6 +10,8 @@
 // Output: none
 // - Leave a brief information about the function
 void print_all_records(Record records[]){
+   int num_of_records = 0;
+
    printf("Printing...\n\n");
    for(int i = 0; i < 1000; i++){
      if(records[i].valid == -1){
@@ -20,6 +22,11 @@ void print_all_records(Record records[]){
      printf("Address: %s\n", records[i].address);
      printf("Phone: %s \n", records[i].phoneno);
      printf("-----------\n\n");
+     num_of_records++;
+   }
+
+   if(num_of_records == 0){
+     printf("Record is empty!\n\n");
    }
 }
 
@@ -40,16 +47,8 @@ void print_n_records(Record records[]){
    }
 }
 
-
-// Function: add_a_record()
-// Input: record - array of Records; this may contain empty elements in the middle
-// Output: none
-// - Leave a brief information about the function
-
-//Creates an account with following informations:
-//1. Name 2. Phone Number 3. Address 4. Password
 void add_a_record(Record records[]){
-   // TODO: Modify this function as you need
+   
    printf("adding record...\n");
    double accno = 33330000000000;
    srand(time(NULL));
@@ -83,7 +82,6 @@ void add_a_record(Record records[]){
   printf("Please enter your address: ");
   fgets(records[i].address, 100, stdin);
   records[i].address[strcspn(records[i].address, "\n")] = 0;
-  //while ((getchar()) != '\n');
 
   printf("Please enter your phone number(with - ): ");
   scanf("%s", records[i].phoneno);
@@ -118,26 +116,58 @@ void add_a_record(Record records[]){
 }
 
 void save_to_txtfile(Record records[]){
-  FILE * fp = fopen("records.txt", "wt");
-  if(!fp){
-    printf("Error creating a text file");
-    return;
-  }
-  fprintf(fp, "========== Records ==========");
+  int num_of_records = 0;
 
   for(int i = 0; i < 1000; i++){
-     if(records[i].valid == -1){
-       continue;
-     } else{
-     fprintf(fp, "Name: %s \n", records[i].name);
-     fprintf(fp, "Account Number: %0.0f \n", records[i].accountno);
-     fprintf(fp, "Address: %s\n", records[i].address);
-     fprintf(fp, "Phone: %s \n", records[i].phoneno);
-     fprintf(fp, "-------------------------------\n\n");
-     printf("NAME: %s\n", records[i].name);
-   }
+    if(records[i].valid == -1){
+      continue;
+    } else{
+      num_of_records++;
+    }
   }
-  printf("Save Success!\n");
+
+  if(num_of_records == 0){
+    printf("There are no records to save.\n\n");
+    return;
+  }
+
+  int len = 0;
+  char space[100] = "                         |";
+
+   FILE * f = fopen("output.txt", "wt");
+    if(!f){
+    printf("Error creating a text file");
+    return;
+    }
+    fprintf(f, "============ Records ============");
+
+    for(int i = 0; i < 1000; i++){
+      if(records[i].valid == 1){
+        fprintf(f, "\n|NAME: %s", records[i].name);
+        len = strlen(records[i].name);
+        char *temp = space + len;
+        fprintf(f, "%s\n", temp);
+        fprintf(f, "|_______________________________|\n");
+        fprintf(f, "|ACCOUNT NUMBER: %0.0f |\n", records[i].accountno);
+        fprintf(f, "|_______________________________|\n");
+        fprintf(f, "|ADDRESS: %s", records[i].address);
+        len = strlen(records[i].address) + 3;
+        temp = space + len;
+        fprintf(f, "%s\n", temp);
+        fprintf(f, "|_______________________________|\n");
+        fprintf(f, "|PHONE NO.: %s", records[i].phoneno);
+        temp = space + 18;
+        fprintf(f, "%s\n", temp);
+        fprintf(f, "|                               |\n");
+        fprintf(f, "|===============================|\n");
+        fprintf(f, "|                               |");
+      }
+    }
+
+    fclose(f);
+
+    printf("Record has been successfully saved: output.txt\n\n");
+ 
 }
 
 void delete_record(Record records[]){
@@ -250,11 +280,10 @@ void update_record(Record records[]){
         case 1: 
           while ((getchar()) != '\n');
           printf("Name: ");
-          //fgets(records[i].name, 100, stdin);
           fgets(records[i].name, 100, stdin);
           records[i].name[strcspn(records[i].name, "\n")] = 0;
           printf("Your name has been succesfully updated: %s\n\n", records[i].name);
-          printf("Hit Enter to continue...\n");
+          //printf("Hit Enter to continue...\n");
           return;
         case 2:
           printf("Phone Number(with -): ");
@@ -286,7 +315,7 @@ void update_record(Record records[]){
           //scanf("%s", records[i].address);
           //while ((getchar()) != '\n');
           printf("Your address has been successfully updated: %s\n\n", records[i].address);
-          printf("Hit Enter to continue...\n");
+          //printf("Hit Enter to continue...\n");
           return;
       } // end of switch
       
@@ -304,6 +333,10 @@ void read_from_txtfile(Record records[]){
     int length = 0;
     double accno = 0;
     char *dummy;
+
+    for(int z = 0; z < 1000; z++){
+      records[z].valid = -1;
+    }
  
     fp = fopen(filename, "r");
     if (fp == NULL){
@@ -354,13 +387,72 @@ void read_from_txtfile(Record records[]){
         }
       }
     fclose(fp);
-
-    // for(int a = 0; a < 4; a++){
-    //  printf("Name: %s \n", records[a].name);
-    //  printf("Account Number: %0.0f \n", records[a].accountno);
-    //  printf("Address: %s\n", records[a].address);
-    //  printf("Phone: %s \n", records[a].phoneno);
-    //  printf("-----------\n\n");
-    // }
+    printf("Record has been succesfully loaded.\n\n");
+    //printf("Hit Enter to continue..\n");
+    return;
 }
+
+void clear_all_records(Record records[]){
+  char yn;
+  int emergency_password = 941207;
+  int code = 0;
+  char oneonetwo[] = "Dialing 112";
+
+  printf("Please provide emergency code: ");
+  scanf("%d", &code);
+  while ((getchar()) != '\n');
+  if(code == emergency_password){
+    printf("***WARNING***\n");
+    printf("All Records will be deleted.\n");
+    while(1){
+      printf("Proceed? [y / n]\n");
+      scanf("%c", &yn);
+      if(yn == 'y'){
+        for(int i = 0; i < 1000; i++){
+        records[i].valid = -1;
+        }
+      printf("All records has been deleted.\n\n");
+      while ((getchar()) != '\n');
+      return; 
+      } else if(yn == 'n'){
+        printf("Deleting process terminated.\n\n");
+        while ((getchar()) != '\n');
+        return;
+      } else{
+        printf("Wrong input please try again.\n");
+        while ((getchar()) != '\n');
+        continue;
+      }   
+    }
+  } else{
+    printf("YOU HAVE GIVEN WRONG CODE!!!\n");
+    for(int i = 1; i < 30; i++){
+      if(i % 4 == 1){
+        printf("\r%s", oneonetwo);
+        fflush(stdout);
+        sleep(1);
+      } else if(i % 4 == 2){
+        printf("\rDialing 112.  ");
+        fflush(stdout);
+        sleep(1);
+      } else if(i % 4 == 3){
+        printf("\rDialing 112.. ");
+        fflush(stdout);
+        sleep(1);
+      } else{
+        printf("\rDialing 112...");
+        fflush(stdout);
+        sleep(1);
+      }
+    }
+
+    printf("\n\n");
+    return;
+  }   
+}
+
+
+
+
+
 
