@@ -1,0 +1,31 @@
+Name: Chan Kim
+RRN: 123456-1234567
+Account Number: 33332069126553
+Password: 1234
+Address: Pohang
+Phone Number: 010-1234-5678
+Valid: 1
+---------------------------
+Name: Alice
+RRN: 123456-1234567
+Account Number: 33332069121234
+Password: 2345
+Address: Seoul
+Phone Number: 010-2456-2355
+Valid: 1
+---------------------------
+Name: Abigale
+RRN: 234567-4567890
+Account Number: 33332084921245
+Password: 5678
+Address: Daegu
+Phone Number: 010-9899-2448
+Valid: 1
+----------------------------
+Name: Ted
+RRN: 971234-1829322
+Account Number: 33332083910377
+Password: 9876
+Address: Busan
+Phone Number: 010-4226-8743
+Valid: 1
