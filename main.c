@@ -47,7 +47,6 @@ void input_handler(char input[], Record records[]){
       save_to_txtfile(records);   
    else if(!strcmp(input, "5")){
       delete_record(records);
-      while ((getchar()) != '\n');
    }
    else if(!strcmp(input, "6")){
      update_record(records);
@@ -65,7 +64,7 @@ void input_handler(char input[], Record records[]){
      //while ((getchar()) != '\n');
    }
    else if(!strcmp(input, "99"))
-      printf("Terminating... bye!\n"); // Quit - no operation (an empty statement with a semi-colon)
+      printf("Program will now terminate...\n"); // Quit - no operation (an empty statement with a semi-colon)
    else
       printf("Unknown menu: %s \n\n", input);
 }
@@ -77,9 +76,9 @@ void input_handler(char input[], Record records[]){
 // Output: none
 // - Leave a brief information about the function
 void display_menu(){
-   printf("******************************\n");
+   printf("********************************\n");
    printf(" Bank account management system \n");
-   printf("******************************\n");
+   printf("********************************\n");
    printf(" 1. Add a new member\n");
    printf(" 2. Print all members\n");
    printf(" 3. Print n number of records\n");

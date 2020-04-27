@@ -5,10 +5,6 @@
 #include <unistd.h>
 #include "base.h"
 
-// Function: print_all_records()
-// Input: record - array of Records; this may contain empty elements in the middle
-// Output: none
-// - Leave a brief information about the function
 void print_all_records(Record records[]){
    int num_of_records = 0;
 
@@ -41,7 +37,7 @@ void print_n_records(Record records[]){
      }
      printf("Name: %s\n", records[i].name);
      printf("Account Number: %0.0f \n", records[i].accountno);
-     printf("Address: %s", records[i].address);
+     printf("Address: %s\n", records[i].address);
      printf("Phone: %s \n", records[i].phoneno);
      printf("-----------\n\n");
    }
@@ -175,6 +171,18 @@ void delete_record(Record records[]){
   char pw[4];
   char yn;
   int count = 5;
+  int num_of_records = 0;
+
+  for(int i = 0; i < 1000; i++){
+    if(records[i].valid != -1){
+      num_of_records++;
+    }
+  }
+
+  if(num_of_records == 0){
+    printf("Record is empty. Nothing to delete.\n\n");
+    return;
+  }
 
   printf("Please provide your account number: ");
   scanf("%lf", &accno);
@@ -197,6 +205,7 @@ void delete_record(Record records[]){
             if(yn == 'y'){
               records[i].valid = -1;
               printf("Record Succesfully Deleted.\n\n");
+              while ((getchar()) != '\n');
               return;
             } else if(yn == 'n'){
               printf("Deleting process terminated.\n\n");
