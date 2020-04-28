@@ -209,6 +209,7 @@ void delete_record(Record records[]){
               return;
             } else if(yn == 'n'){
               printf("Deleting process terminated.\n\n");
+              while ((getchar()) != '\n');
               return;
             } else{
               printf("Wrong input please try again.\n");
@@ -218,8 +219,7 @@ void delete_record(Record records[]){
         } else{
           printf("Wrong Password. %d tries left.\n", --count);
           if(count <= 0){
-            printf("You have given wrong password too many times. Deletion process will now terminate..\n");
-            while ((getchar()) != '\n');
+            printf("You have given wrong password too many times. Deletion process will now terminate..\n\n");
             return;
           }
         }
@@ -242,6 +242,7 @@ void update_record(Record records[]){
 
   printf("Please enter your account number: ");
   scanf("%lf", &accno);
+  while ((getchar()) != '\n');
 
   for(int i = 0; i < 1000; i++){
     if(records[i].valid == -1)
@@ -256,8 +257,7 @@ void update_record(Record records[]){
         } else{
           printf("Wrong Password. %d tries left.\n", --count);
           if(count <= 0){
-            printf("You have given wrong password too many times. Update process will now terminate..\n");
-            while ((getchar()) != '\n');
+            printf("\nYou have given wrong password too many times. Update process will now terminate..\n\n");
             return;
           }
         }
@@ -285,6 +285,7 @@ void update_record(Record records[]){
       switch(choice){
         case 0:
           printf("Quitting without changes..\n\n");
+          while ((getchar()) != '\n');
           return;
         case 1: 
           while ((getchar()) != '\n');
@@ -298,6 +299,7 @@ void update_record(Record records[]){
           printf("Phone Number(with -): ");
           scanf("%s", records[i].phoneno);
           printf("Your phone number has been succesfully updated: %s\n\n", records[i].phoneno);
+          while ((getchar()) != '\n');
           return;
         case 3: 
           printf("New Password: ");
@@ -311,6 +313,7 @@ void update_record(Record records[]){
               scanf("%s", pwconfirm);
               if(strcmp(records[i].password, pwconfirm) == 0){
               printf("Password succesfully updated.\n\n");
+              while ((getchar()) != '\n');
               return;
             }
             printf("Your Password does not match. Please re-try: ");
@@ -321,10 +324,7 @@ void update_record(Record records[]){
           printf("Address: ");
           fgets(records[i].address, 100, stdin);
           records[i].address[strcspn(records[i].address, "\n")] = 0;
-          //scanf("%s", records[i].address);
-          //while ((getchar()) != '\n');
           printf("Your address has been successfully updated: %s\n\n", records[i].address);
-          //printf("Hit Enter to continue...\n");
           return;
       } // end of switch
       
@@ -397,7 +397,6 @@ void read_from_txtfile(Record records[]){
       }
     fclose(fp);
     printf("Record has been succesfully loaded.\n\n");
-    //printf("Hit Enter to continue..\n");
     return;
 }
 
@@ -435,7 +434,7 @@ void clear_all_records(Record records[]){
     }
   } else{
     printf("YOU HAVE GIVEN WRONG CODE!!!\n");
-    for(int i = 1; i < 30; i++){
+    for(int i = 1; i < 18; i++){
       if(i % 4 == 1){
         printf("\r%s", oneonetwo);
         fflush(stdout);
@@ -455,9 +454,80 @@ void clear_all_records(Record records[]){
       }
     }
 
-    printf("\n\n");
+    printf("\n\nYour Action has been reported!\n");
+    printf("\n");
     return;
   }   
+}
+
+void append_record(Record records[]){
+
+    FILE *fp1;
+    char str[1000];
+    char* filename = "append.txt";
+    int i = 0;
+    int index = 0;
+    int length = 0;
+    double accno = 0;
+    char *dummy;
+ 
+    fp1 = fopen(filename, "r");
+    if (fp1 == NULL){
+        printf("File does not exist: %s",filename);
+        return;
+    }
+
+    char buf[100];
+
+    while (fgets(str, 1000, fp1) != NULL){
+      for(int i = 0; i < 1000; i++){
+        if(records[i].valid == -1){
+          index = i;
+          break;
+        }
+      } //end of for
+
+        if(i == 0){        
+          char *temp = str + 6;
+          length = strlen(temp);
+          temp[length - 1] = '\0';
+          strcpy(records[index].name, temp);
+        } else if(i == 1){
+            char *temp = str + 5;
+            length = strlen(temp);
+            temp[length - 1] = '\0';
+            strcpy(records[index].rrn, temp);
+        } else if(i == 2){
+            char *temp = str + 16;
+            length = strlen(temp);
+            temp[length - 1] = '\0';
+            records[index].accountno = strtod(temp, &dummy);
+        } else if(i == 3){
+            char *temp = str + 10;
+            length = strlen(temp);
+            temp[length - 1] = '\0';
+            strcpy(records[index].password, temp);
+        } else if(i == 4){
+            char *temp = str + 9;
+            length = strlen(temp);
+            temp[length - 1] = '\0';
+            strcpy(records[index].address, temp);
+        } else if(i == 5){
+            char *temp = str + 14;
+            length = strlen(temp);
+            temp[length - 1] = '\0';
+            strcpy(records[index].phoneno, temp);
+        } else if(i == 6){
+            records[index].valid = 1;
+        }
+        i++;
+        if(i == 8){
+          i = 0;
+        }
+      }
+    fclose(fp1);
+    printf("Record has been succesfully appended.\n\n");
+    return;
 }
 
 

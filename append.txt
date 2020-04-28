@@ -1,0 +1,15 @@
+Name: Bryan
+RRN: 890723-1325562
+Account Number: 33338274625173
+Password: 0723
+Address: Jeon Ju
+Phone Number: 010-2441-2111
+Valid: 1
+---------------------------
+Name: Alysse
+RRN: 961228-2244767
+Account Number: 33339286112092
+Password: 1228
+Address: Je Ju
+Phone Number: 010-9021-7422
+Valid: 1

@@ -50,31 +50,25 @@ void input_handler(char input[], Record records[]){
    }
    else if(!strcmp(input, "6")){
      update_record(records);
-     //while ((getchar()) != '\n');
    }
    else if(!strcmp(input, "7")){
      defragment(records, numrecords);
    }
    else if(!strcmp(input, "8")){
      read_from_txtfile(records);
-     //while ((getchar()) != '\n');
+   }
+   else if(!strcmp(input, "9")){
+     append_record(records);
    }
    else if(!strcmp(input, "119")){
      clear_all_records(records);
-     //while ((getchar()) != '\n');
    }
    else if(!strcmp(input, "99"))
-      printf("Program will now terminate...\n"); // Quit - no operation (an empty statement with a semi-colon)
+      printf("Program will now terminate...\n"); 
    else
       printf("Unknown menu: %s \n\n", input);
 }
 
-
-
-// Function: display_menu()
-// Input: none
-// Output: none
-// - Leave a brief information about the function
 void display_menu(){
    printf("********************************\n");
    printf(" Bank account management system \n");
@@ -87,6 +81,7 @@ void display_menu(){
    printf(" 6. Update Information\n");
    printf(" 7. Defragmentation\n");
    printf(" 8. Read from text file\n");
+   printf(" 9. Append Data from text file\n");
    printf(" 119. Clear all records\n");
    printf(" 99. Quit\n");
 }
