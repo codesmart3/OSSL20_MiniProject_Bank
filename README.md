@@ -10,10 +10,10 @@ Run the program by './main'
 Once you succesfully execute the program, you will be able to see the menu, which has the list of actions you could do. 
 Some of the choices (ex. 1. Add a new member) require you to give inputs. Follow the instruction given by the program carefully.
 Example text files are included. 
-'8. Read from text file' will read records from "list.txt"
-'9. Append Data from text file' will read records from "append.txt"
-'4. Save records to text file' will save the records to "output.txt"
-You can modify the records in "list.txt" and "append.txt", but make sure you follow the format. 
+<em>8. Read from text file</em> will read records from "list.txt"
+<em>9. Append Data from text file</em> will read records from "append.txt"
+<em>4. Save records to text file</em> will save the records to "output.txt"
+You can modify the records in "list.txt" and "append.txt", <strong>but make sure you follow the format</strong>. 
 
 ## Example Scenario
 If you are not sure how to add the record, follow below inputs. 
