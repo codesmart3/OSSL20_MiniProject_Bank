@@ -9,7 +9,7 @@ Run the program by './main'
 ## Manual
 Once you succesfully execute the program, you will be able to see the menu, which has the list of actions you could do. 
 Some of the choices (ex. 1. Add a new member) require you to give inputs. Follow the instruction given by the program carefully.
-Example text files are included. 
+Example text files are included.<br> 
 <em>8. Read from text file</em> will read records from "list.txt"<br>
 <em>9. Append Data from text file</em> will read records from "append.txt"<br>
 <em>4. Save records to text file</em> will save the records to "output.txt"<br>
