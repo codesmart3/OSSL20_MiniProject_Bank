@@ -1,7 +1,7 @@
 # OSSL20_MiniProject_Bank
 This program mimics bank account management system. Its main function is to take user’s information as the input and create a bank account as an output. The required fields to generate an account is as follows: Name, Residental Registration Number (RRN), Address, Phone Number, and Password.
 
-##How to Run
+## How to Run
 Clone the repository to your local directory.
 Run the makefile by './make'
 Run the program by './main'
