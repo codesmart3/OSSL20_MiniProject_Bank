@@ -60,6 +60,9 @@ void input_handler(char input[], Record records[]){
    else if(!strcmp(input, "9")){
      append_record(records);
    }
+   else if(!strcmp(input, "10")){
+     advanced_search(records);
+   }
    else if(!strcmp(input, "119")){
      clear_all_records(records);
    }
@@ -82,6 +85,7 @@ void display_menu(){
    printf(" 7. Defragmentation\n");
    printf(" 8. Read from text file\n");
    printf(" 9. Append Data from text file\n");
+   printf(" 10. Advanced Search\n");
    printf(" 119. Clear all records\n");
    printf(" 99. Quit\n");
 }

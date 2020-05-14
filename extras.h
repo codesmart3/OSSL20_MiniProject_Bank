@@ -6,5 +6,7 @@
 // function prototypes
 int defragment(Record[], int num);
 void display_stats(Record[]);
+void advanced_search(Record[]);
+
 
 #endif
